@@ -1,0 +1,52 @@
+<div class="container" fxLayout="row" fxLayout.xs="column">
+  <div fxFlex="40" fxFlexFill>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="white-box auth-container mat-elevation-z8">
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName" required />
+        <mat-error *ngIf="registerForm.controls.firstName.hasError('required')">
+          First Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" required />
+        <mat-error *ngIf="registerForm.controls.lastName.hasError('required')">
+          Last Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" required />
+        <mat-error *ngIf="registerForm.controls.email.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required />
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="registerForm.controls.password.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput formControlName="confirmPassword" [type]="hide ? 'password' : 'text'" required />
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="registerForm.controls.confirmPassword.hasError('required')">
+          Must Confirm Password
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <div class="button-row">
+        <button mat-stroked-button type="reset" [routerLink]="['/login']">Back</button>&nbsp;&nbsp;
+        <button mat-stroked-button type="submit" class="btn-color">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

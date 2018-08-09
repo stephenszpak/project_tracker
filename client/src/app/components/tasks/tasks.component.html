@@ -1,0 +1,44 @@
+<div flex fxLayout="row" class="add-btn-pos">
+  <button mat-raised-button class="btn-color" routerLink="create">Add Task</button>
+</div>
+
+<div class="container" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+  <div fxFlex="95" fxFlex.xs="45">
+    <div class="white-box mat-elevation-z8">
+      <mat-form-field class="input-lg">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> No</th>
+          <td mat-cell *matCellDef="let task">
+            {{task.id}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+          <td mat-cell *matCellDef="let task"> {{task.title}} </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell *matCellDef="let task"> {{task.description}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let task">
+            <button mat-icon-button class="icon-color" matTooltip="Details" matTooltipPosition="right" routerLink="update/{{task.id}}">
+              <i class="fas fa-info-circle fa-lg"></i>
+            </button>
+            <button *ngIf="currentRole != admin" mat-icon-button matTooltip="Delete" matTooltipPosition="right" color="warn" (click)="onDelete(task.id)">
+              <i class="fas fa-trash-alt fa-lg"></i>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+    </div>
+  </div>
+</div>

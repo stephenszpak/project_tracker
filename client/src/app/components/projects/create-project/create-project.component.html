@@ -1,0 +1,169 @@
+<div class="container" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+  <div fxFlex="75" fxFlex.xs="45">
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="white-box custom-form-container mat-elevation-z8" novalidate id="pdfArea">
+
+      <div fxLayout="row" fxLayout.xs="column" class="align-header">
+        <mat-form-field appearance="outline" class="input-md" fxClass-sm="input-lg">
+          <mat-label>Project Name</mat-label>
+          <input matInput formControlName="name" [errorStateMatcher]="matcher" required />
+          <mat-error *ngIf="projectForm.controls.name.hasError('required')">
+            Project Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <span class="spacer"></span>
+        <span class="add-btn-pos">
+          <img height="96px" src="../assets/download.png" alt="Ingram">
+        </span>
+      </div>
+
+      <mat-form-field appearance="outline" class="input-lg" hintLabel="Max 750 characters">
+        <mat-label>Description</mat-label>
+        <textarea matInput #descInput maxlength="750" formControlName="description"></textarea>
+        <mat-hint align="end">{{descInput.value?.length || 0}}/750</mat-hint>
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayout.xs="column">
+        <mat-form-field appearance="outline" class="input-lg">
+          <mat-label>Project Type</mat-label>
+          <mat-select formControlName="projectType" [errorStateMatcher]="matcher" required>
+            <mat-option *ngFor="let type of projectTypes" [value]="type.value">{{type.viewValue}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="projectForm.controls.projectType.hasError('required')">
+            Project Type Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+        <mat-form-field appearance="outline" class="input-lg">
+          <mat-label>Locations Impacted</mat-label>
+          <mat-select formControlName="locationsImpacted"  multiple [errorStateMatcher]="matcher" required>
+            <mat-option *ngFor="let location of locations" [value]="location.value">{{location.viewValue}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="projectForm.controls.locationsImpacted.hasError('required')">
+            Locations Impacted are <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="input-lg">
+          <mat-label>Platforms Impacted</mat-label>
+          <mat-select formControlName="platformsImpacted" multiple [errorStateMatcher]="matcher" required>
+            <mat-option *ngFor="let platform of platforms" [value]="platform.value">{{platform.viewValue}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="projectForm.controls.platformsImpacted.hasError('required')">
+            Platforms Impacted are <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row">
+        <mat-checkbox formControlName="newPricingRules" labelPosition="before" color="primary">New Pricing Rules&nbsp;</mat-checkbox>
+      </div>
+      <br>
+
+      <mat-form-field appearance="outline" class="input-lg">
+        <mat-label>Audiences Impacted</mat-label>
+        <mat-select formControlName="audiencesImpacted" multiple [errorStateMatcher]="matcher" required>
+          <mat-option *ngFor="let audience of audiences" [value]="audience.value">{{audience.viewValue}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="projectForm.controls.audiencesImpacted.hasError('required')">
+          Audiences Impacted are <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayout.xs="column">
+        <mat-form-field appearance="outline" class="input-lg">
+          <mat-label>Project Sponsor</mat-label>
+          <input matInput formControlName="projectSponsor" value="{{currentUser.firstName}} {{currentUser.lastName}}" />
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="input-lg">
+          <mat-label>Executive Sponsor</mat-label>
+          <input type="text" aria-label="Sponsornames" matInput formControlName="executiveSponsor" [matAutocomplete]="exps" [errorStateMatcher]="matcher" required>
+          <mat-autocomplete #exps="matAutocomplete">
+            <mat-option *ngFor="let option of usersOptions" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="projectForm.controls.executiveSponsor.hasError('required')">
+            Executive Sponsor is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field appearance="outline" class="input-lg">
+          <mat-label>Product Sponsor</mat-label>
+          <input type="text" aria-label="Sponsornames" matInput formControlName="productSponsor" [matAutocomplete]="prds" [errorStateMatcher]="matcher" required>
+          <mat-autocomplete #prds="matAutocomplete">
+            <mat-option *ngFor="let option of usersOptions" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="projectForm.controls.productSponsor.hasError('required')">
+            Product Sponsor is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row">
+        <h3 class="uppercase-text">business case</h3>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+        <mat-form-field appearance="outline" class="input-lg" fxClass-sm="input-lg">
+          <mat-label>Volume</mat-label>
+          <input matInput type="number" formControlName="volume" [errorStateMatcher]="matcher" [errorStateMatcher]="matcher" required />
+          <mat-error *ngIf="projectForm.controls.volume.hasError('required')">
+            Volume is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field type="number" appearance="outline" class="input-lg" fxClass-sm="input-lg">
+          <mat-label>Revenue at List</mat-label>
+          <input matInput formControlName="revenueAtList" />
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row">
+        <mat-checkbox formControlName="dealFormEligible" labelPosition="before" color="primary">Deal Form Eligible&nbsp;</mat-checkbox>
+      </div>
+      <br>
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+        <mat-form-field appearance="outline" class="input-lg" fxClass-sm="input-lg">
+          <mat-label>New Titles</mat-label>
+          <input matInput formControlName="newTitles" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-lg" fxClass-sm="input-lg">
+          <mat-label>New Accounts</mat-label>
+          <input matInput formControlName="newAccounts" />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="input-lg">
+        <mat-label>Business Case</mat-label>
+        <textarea matInput formControlName="businessCase" [errorStateMatcher]="matcher" required></textarea>
+
+        <mat-error *ngIf="projectForm.controls.businessCase.hasError('required')">
+          Business Case is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-lg">
+        <mat-label>Project Details</mat-label>
+        <textarea matInput formControlName="projectDetails" [errorStateMatcher]="matcher" required></textarea>
+        <mat-error *ngIf="projectForm.controls.projectDetails.hasError('required')">
+          Project Details are <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="input-lg">
+        <mat-label>Comments</mat-label>
+        <textarea matInput formControlName="comments"></textarea>
+      </mat-form-field>
+
+      <div class="button-row">
+        <button mat-raised-button type="reset" routerLink="/projects" color="warn" class="mat-elevation-z4">Cancel</button>&nbsp;
+        <button mat-raised-button type="submit" [disabled]="!projectForm.valid" class="btn-color mat-elevation-z4">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

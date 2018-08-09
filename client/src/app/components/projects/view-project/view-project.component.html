@@ -1,0 +1,101 @@
+<div flex fxLayout="row" class="add-btn-pos">
+  <button mat-stroked-button class="btn-color mat-elevation-z4" (click)="captureScreen()">Create PDF</button>
+</div>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+  <div fxFlex="65" fxFlex.xs="45">
+    <mat-card class="mat-elevation-z8 card-bottom-margin" id="contentToConvert">
+      <mat-card-header class="align-header">
+        <img height="74px" class="img-border" src="../assets/download.png" alt="Ingram">
+        <span class="spacer"></span>
+        <p class="sponsor-border">{{projectInfo.projectSponsor}} <span class="ital">Project Sponsor</span>
+          <br><br>{{projectInfo.executiveSponsor}} <span class="ital">Executive Sponser</span>
+          <br><br>{{projectInfo.productSponsor}} <span class="ital">Product Sponser</span>
+        </p>
+      </mat-card-header>
+      <hr />
+      <hr />
+      <mat-card-content>
+        <mat-list role="list">
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class="object-bot-margin-md">
+            <div fxFlex="35%">
+              <h3 matSubheader>Project</h3>
+              <mat-list-item role="listitem">{{projectInfo.name}}</mat-list-item>
+            </div>
+            <span class="spacer"></span>
+            <div fxFlex="15%">
+              <h3 matSubheader>Project Type</h3>
+              <mat-list-item role="listitem">{{projectInfo.projectType}}</mat-list-item>
+            </div>
+            <div fxFlex="15%">
+              <h3 matSubheader>Date Created</h3>
+              <mat-list-item role="listitem">{{projectInfo.createdAt | date}}</mat-list-item>
+            </div>
+          </div>
+
+          <hr />
+
+          <!-- impacted -->
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" class="object-bot-margin-md">
+            <div fxFlex="33%">
+              <h3 matSubheader>Locations Impacted</h3>
+              <mat-list-item role="listitem" *ngFor="let loc of projectInfo.locationsImpacted">- {{loc}}</mat-list-item>
+            </div>
+            <div fxFlex="33%">
+              <h3 matSubheader>Platforms Impacted</h3>
+              <mat-list-item role="listitem" *ngFor="let plat of projectInfo.platformsImpacted">- {{plat}}</mat-list-item>
+            </div>
+            <div fxFlex="33%">
+              <h3 matSubheader>Audiences Impacted</h3>
+              <mat-list-item role="listitem" *ngFor="let aud of projectInfo.audiencesImpacted">- {{aud}}</mat-list-item>
+            </div>
+          </div>
+        </mat-list>
+
+        <hr />
+        <hr />
+
+        <mat-list role="list" class="object-bot-margin-md">
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <div fxFlex="25%">
+              <h3 matSubheader>Volume (units)</h3>
+              <mat-list-item role="listitem">{{projectInfo.volume}}</mat-list-item>
+            </div>
+            <div fxFlex="25%">
+              <h3 matSubheader>Revenue At List</h3>
+              <mat-list-item role="listitem"><i class="material-icons">attach_money</i> {{projectInfo.revenueAtList}}</mat-list-item>
+            </div>
+            <div fxFlex="25%">
+              <h3 matSubheader>New Titles</h3>
+              <mat-list-item role="listitem">{{projectInfo.newTitles}}</mat-list-item>
+            </div>
+            <div fxFlex="25%">
+              <h3 matSubheader>New Accounts</h3>
+              <mat-list-item role="listitem">{{projectInfo.newAccounts}}</mat-list-item>
+            </div>
+          </div>
+        </mat-list>
+
+        <div fxLayout="column" fxLayout.xs="column">
+          <div fxFlex="33%" class="form-border">
+            <h4 matSubheader>Business Case</h4>
+            <div class="body-text">
+              {{projectInfo.businessCase}}
+            </div>
+          </div>
+          <div fxFlex="33%" class="form-border">
+            <h4 matSubheader>Project Details</h4>
+            <div class="body-text">
+              {{projectInfo.projectDetails}}
+            </div>
+          </div>
+          <div fxFlex="33%" class="form-border">
+            <h4 matSubheader>Comments</h4>
+            <div class="body-text">
+              {{projectInfo.comments}}
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

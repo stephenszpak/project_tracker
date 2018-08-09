@@ -1,0 +1,12 @@
+<div fxLayout="column" fxFlexFill fxLayoutGap="30px">
+    <div fxLayout="row" fxFlexAlign="center">
+      <h1>{{data.title}}</h1>
+    </div>
+    <div fxLayout="row" fxFlexAlign="center">
+      <h3>{{data.body}}</h3>
+    </div>
+    <div fxFlex="grow" fxLayout="row" fxLayoutAlign="center end" fxLayoutGap="10px">
+      <button mat-stroked-button (click)="onCancel()">Go Back</button> &nbsp;&nbsp;
+      <button mat-stroked-button (click)="onDelete()" color="warn">Delete</button>
+    </div>
+</div>
